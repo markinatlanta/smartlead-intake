@@ -10,6 +10,15 @@
       padding: 40px;
     }
 
+    .header {
+      text-align: right;
+      margin-bottom: 20px;
+    }
+
+    .logo {
+      width: 100px;
+    }
+
     .container {
       background: white;
       padding: 30px;
@@ -17,14 +26,6 @@
       margin: 0 auto;
       border-radius: 10px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      position: relative;
-    }
-
-    .logo {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      width: 80px;
     }
 
     h2 {
@@ -68,8 +69,11 @@
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="header">
     <img src="jks-logo.png" class="logo" alt="JKS Advisory Logo">
+  </div>
+
+  <div class="container">
     <h2 id="formTitle">Thanks for reaching out</h2>
 
     <form action="https://smartlead-agent.onrender.com/webhook" method="POST" onsubmit="handleResponse(event)">
@@ -102,11 +106,11 @@
 
         const clinicNames = {
           radiance: "Radiance Aesthetics",
-          // Add more as needed
+          // Add more if needed
         };
 
         const titleEl = document.getElementById("formTitle");
-        const clinicName = clinicNames[clinicId] || "our team";
+        const clinicName = clinicNames[clinicId] || "our clinic";
         titleEl.textContent = `Thanks for reaching out to ${clinicName}`;
       }
     };
@@ -134,3 +138,4 @@
   </script>
 </body>
 </html>
+
