@@ -1,69 +1,136 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8" />
-  <title>SmartLead Patient Intake</title>
+  <meta charset="UTF-8">
+  <title>SmartLead Intake</title>
   <style>
-    body { font-family: sans-serif; padding: 20px; }
-    form { display: flex; flex-direction: column; gap: 15px; max-width: 600px; margin: auto; }
-    label { font-weight: bold; }
-    input, textarea { width: 100%; padding: 8px; font-size: 14px; }
-    #successMessage { display: none; color: green; font-weight: bold; text-align: center; }
-  </style>
-<script>
-  window.onload = function () {
-    const params = new URLSearchParams(window.location.search);
-    const clinicId = params.get("clinic_id");
-    if (clinicId) {
-      document.getElementById("clinic_id").value = clinicId;
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      padding: 40px;
     }
-  };
 
-  function handleResponse(event) {
-    event.preventDefault();
-    const form = event.target;
+    .container {
+      background: white;
+      padding: 30px;
+      max-width: 500px;
+      margin: 0 auto;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
 
-    fetch(form.action, {
-      method: "POST",
-      body: new FormData(form)
-    }).then(async response => {
-      if (response.ok) {
-        const result = await response.json();
-        form.style.display = "none";
-        document.getElementById("successMessage").innerText = "✅ " + result.message;
-        document.getElementById("successMessage").style.display = "block";
-      } else {
-        const text = await response.text();
-        alert(`Submission failed (${response.status}): ${text}`);
-      }
-    }).catch(err => {
-      alert("Error submitting form: " + err.message);
-    });
-  }
-</script>
+    .logo {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 80px;
+    }
 
+    h2 {
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-size: 20px;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #0073e6;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #successMessage {
+      display: none;
+      color: green;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-  <form action="https://smartlead-agent.onrender.com/webhook" method="POST" onsubmit="handleResponse(event)">
-    <input type="hidden" name="clinic_id" id="clinic_id" />
+  <div class="container">
+    <img src="jks-logo.png" class="logo" alt="JKS Advisory Logo">
+    <h2 id="formTitle">Thanks for reaching out</h2>
 
-    <label for="entry.478729146">Patient Name</label>
-    <input type="text" name="entry.478729146" required />
+    <form action="https://smartlead-agent.onrender.com/webhook" method="POST" onsubmit="handleResponse(event)">
+      <label for="entry.478729146">Your Name</label>
+      <input type="text" name="entry.478729146" required>
 
-    <label for="entry.2126300618">Patient Email</label>
-    <input type="email" name="entry.2126300618" required />
+      <label for="entry.2126300618">Your Email</label>
+      <input type="email" name="entry.2126300618" required>
 
-    <label for="entry.1211959985">Your Question</label>
-    <textarea name="entry.1211959985" rows="4" required></textarea>
+      <label for="entry.1211959985">Your Question</label>
+      <textarea name="entry.1211959985" required></textarea>
 
-    <label for="entry.1006704117">Phone Number (Optional)</label>
-    <input type="tel" name="entry.1006704117" placeholder="(555) 123-4567" pattern="^\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}$" />
+      <label for="entry.1006704117">Phone (optional)</label>
+      <input type="tel" name="entry.1006704117">
 
-    <button type="submit">Submit</button>
-  </form>
+      <input type="hidden" id="clinic_id" name="clinic_id" value="">
 
-  <div id="successMessage">
-    ✅ Thank you! Your question has been received.
+      <button type="submit">Send Message</button>
+    </form>
+
+    <div id="successMessage">✅ Your message was sent. You’ll receive a reply shortly.</div>
   </div>
+
+  <script>
+    window.onload = function () {
+      const params = new URLSearchParams(window.location.search);
+      const clinicId = params.get("clinic_id");
+      if (clinicId) {
+        document.getElementById("clinic_id").value = clinicId;
+
+        const clinicNames = {
+          radiance: "Radiance Aesthetics",
+          // Add more as needed
+        };
+
+        const titleEl = document.getElementById("formTitle");
+        const clinicName = clinicNames[clinicId] || "our team";
+        titleEl.textContent = `Thanks for reaching out to ${clinicName}`;
+      }
+    };
+
+    function handleResponse(event) {
+      event.preventDefault();
+      const form = event.target;
+      fetch(form.action, {
+        method: "POST",
+        body: new FormData(form)
+      }).then(async response => {
+        if (response.ok) {
+          const result = await response.json();
+          form.style.display = "none";
+          document.getElementById("successMessage").textContent = "✅ " + result.message;
+          document.getElementById("successMessage").style.display = "block";
+        } else {
+          const text = await response.text();
+          alert(`Submission failed (${response.status}): ${text}`);
+        }
+      }).catch(err => {
+        alert("Error submitting form: " + err.message);
+      });
+    }
+  </script>
 </body>
 </html>
