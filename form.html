@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>SmartLead Patient Intake</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    form { display: flex; flex-direction: column; gap: 15px; max-width: 600px; margin: auto; }
+    label { font-weight: bold; }
+    input, textarea { width: 100%; padding: 8px; font-size: 14px; }
+    #successMessage { display: none; color: green; font-weight: bold; text-align: center; }
+  </style>
+  <script>
+    window.onload = function () {
+      const params = new URLSearchParams(window.location.search);
+      const clinicId = params.get("clinic_id");
+      if (clinicId) {
+        document.getElementById("clinic_id").value = clinicId;
+      }
+    };
+
+    function handleResponse(event) {
+      event.preventDefault();
+      const form = event.target;
+      fetch(form.action, {
+        method: "POST",
+        body: new FormData(form)
+      }).then(response => {
+        if (response.ok) {
+          form.style.display = "none";
+          document.getElementById("successMessage").style.display = "block";
+        } else {
+          alert("Submission failed. Please try again later.");
+        }
+      }).catch(err => {
+        alert("Error submitting form.");
+      });
+    }
+  </script>
+</head>
+<body>
+  <form action="https://smartlead-agent.onrender.com/webhook" method="POST" onsubmit="handleResponse(event)">
+    <input type="hidden" name="clinic_id" id="clinic_id" />
+
+    <label for="entry.478729146">Patient Name</label>
+    <input type="text" name="entry.478729146" required />
+
+    <label for="entry.2126300618">Patient Email</label>
+    <input type="email" name="entry.2126300618" required />
+
+    <label for="entry.1211959985">Your Question</label>
+    <textarea name="entry.1211959985" rows="4" required></textarea>
+
+    <label for="entry.1006704117">Phone Number (Optional)</label>
+    <input type="tel" name="entry.1006704117" placeholder="(555) 123-4567" pattern="^\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}$" />
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <div id="successMessage">
+    ✅ Thank you! Your question has been received.
+  </div>
+</body>
+</html>
