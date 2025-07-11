@@ -10,33 +10,38 @@
     input, textarea { width: 100%; padding: 8px; font-size: 14px; }
     #successMessage { display: none; color: green; font-weight: bold; text-align: center; }
   </style>
-  <script>
-    window.onload = function () {
-      const params = new URLSearchParams(window.location.search);
-      const clinicId = params.get("clinic_id");
-      if (clinicId) {
-        document.getElementById("clinic_id").value = clinicId;
-      }
-    };
-
-    function handleResponse(event) {
-      event.preventDefault();
-      const form = event.target;
-      fetch(form.action, {
-        method: "POST",
-        body: new FormData(form)
-      }).then(response => {
-        if (response.ok) {
-          form.style.display = "none";
-          document.getElementById("successMessage").style.display = "block";
-        } else {
-          alert("Submission failed. Please try again later.");
-        }
-      }).catch(err => {
-        alert("Error submitting form.");
-      });
+<script>
+  window.onload = function () {
+    const params = new URLSearchParams(window.location.search);
+    const clinicId = params.get("clinic_id");
+    if (clinicId) {
+      document.getElementById("clinic_id").value = clinicId;
     }
-  </script>
+  };
+
+  function handleResponse(event) {
+    event.preventDefault();
+    const form = event.target;
+
+    fetch(form.action, {
+      method: "POST",
+      body: new FormData(form)
+    }).then(async response => {
+      if (response.ok) {
+        const result = await response.json();
+        form.style.display = "none";
+        document.getElementById("successMessage").innerText = "✅ " + result.message;
+        document.getElementById("successMessage").style.display = "block";
+      } else {
+        const text = await response.text();
+        alert(`Submission failed (${response.status}): ${text}`);
+      }
+    }).catch(err => {
+      alert("Error submitting form: " + err.message);
+    });
+  }
+</script>
+
 </head>
 <body>
   <form action="https://smartlead-agent.onrender.com/webhook" method="POST" onsubmit="handleResponse(event)">
