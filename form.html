@@ -10,15 +10,6 @@
       padding: 40px;
     }
 
-    .header {
-      text-align: right;
-      margin-bottom: 20px;
-    }
-
-    .logo {
-      width: 100px;
-    }
-
     .container {
       background: white;
       padding: 30px;
@@ -26,6 +17,13 @@
       margin: 0 auto;
       border-radius: 10px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+
+    .logo {
+      float: right;
+      width: 80px;
+      margin-bottom: 10px;
     }
 
     h2 {
@@ -33,6 +31,7 @@
       margin-bottom: 20px;
       font-size: 20px;
       color: #333;
+      clear: both;
     }
 
     label {
@@ -69,11 +68,8 @@
   </style>
 </head>
 <body>
-  <div class="header">
-    <img src="jks-logo.png" class="logo" alt="JKS Advisory Logo">
-  </div>
-
   <div class="container">
+    <img src="jks-logo.png" class="logo" alt="JKS Advisory Logo">
     <h2 id="formTitle">Thanks for reaching out</h2>
 
     <form action="https://smartlead-agent.onrender.com/webhook" method="POST" onsubmit="handleResponse(event)">
@@ -138,4 +134,3 @@
   </script>
 </body>
 </html>
-
