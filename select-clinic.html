@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SmartLead Agent Setup</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 60px auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      position: relative;
+    }
+    img.logo {
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 100px;
+    }
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+    p {
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 12px;
+      width: 100%;
+      font-size: 16px;
+      background-color: #0074D9;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #005fa3;
+    }
+  </style>
+</head>
+<body>
+  <img src="dd7fc7e5-16e7-4a88-b8ae-270a17c2e1c9.png" alt="Logo" class="logo"/>
+  <h1>Welcome to SmartLead Agent Setup</h1>
+  <p>To continue, please enter your assigned <strong>Clinic ID</strong> below. This ID was provided to you after purchase. If you’re unsure, contact us at <a href="mailto:hello@advisoryjks.com">hello@advisoryjks.com</a>.</p>
+
+  <input type="text" id="clinicIdInput" placeholder="e.g. radiance" />
+  <button onclick="goToForm()">Continue</button>
+
+  <script>
+    function goToForm() {
+      const id = document.getElementById("clinicIdInput").value.trim();
+      if (!id) {
+        alert("Please enter your clinic ID to continue.");
+        return;
+      }
+      window.location.href = `/form.html?clinic_id=${encodeURIComponent(id)}`;
+    }
+  </script>
+</body>
+</html>
