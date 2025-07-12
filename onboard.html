@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SmartLead Agent | Clinic Onboarding</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f9f9f9;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      position: relative;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+    .logo {
+      height: 50px;
+    }
+    h1 {
+      font-size: 1.5em;
+      margin: 0;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input[type="text"],
+    input[type="email"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+      margin-top: 5px;
+    }
+    textarea {
+      resize: vertical;
+    }
+    button {
+      margin-top: 20px;
+      padding: 12px;
+      width: 100%;
+      background-color: #0066cc;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #004a99;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>SmartLead Agent Clinic Onboarding</h1>
+      <img src="jks-logo.png" alt="JKS Advisory Logo" class="logo">
+    </div>
+    <form action="https://smartlead-intake.onrender.com/webhook" method="POST">
+      <label for="clinic_id">
+        Choose a short, unique ID for your clinic<br>
+        <small>This will be used internally by our system (e.g., 'radiance')</small>
+      </label>
+      <input type="text" name="clinic_id" required />
+
+      <label for="practice_name">
+        Practice Name<br>
+        <small>This is how your clinic's name will appear in messages sent to patients (e.g., 'Radiance Beauty')</small>
+      </label>
+      <input type="text" name="practice_name" required />
+
+      <label for="facility_type">Facility Type:</label>
+      <select name="facility_type" required>
+        <option value="Medspa">Medspa</option>
+        <option value="Dermatology">Dermatology</option>
+        <option value="Dental">Dental</option>
+        <option value="Urgent Care">Urgent Care</option>
+        <option value="Community Health">Community Health</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <label for="top_services">Top 3 Services You Offer:</label>
+      <input type="text" name="top_services" required />
+
+      <label for="typical_questions">Typical Patient Questions (comma separated):</label>
+      <textarea name="typical_questions" rows="3" required></textarea>
+
+      <label for="office_hours">Office Hours:</label>
+      <input type="text" name="office_hours" required />
+
+      <label for="reply_tone">Tone Preference for Replies:</label>
+      <input type="text" name="reply_tone" required />
+
+      <label for="cta">Booking Link or Call to Action:</label>
+      <input type="text" name="cta" required />
+
+      <label for="style_note">Anything to Emphasize or Avoid in Replies? (optional):</label>
+      <textarea name="style_note" rows="3"></textarea>
+
+      <label for="reply_to_email">Reply-To Email for Patients:</label>
+      <input type="email" name="reply_to_email" required />
+
+      <label for="contact_email">Contact Email (for notifications):</label>
+      <input type="email" name="contact_email" required />
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</body>
+</html>
