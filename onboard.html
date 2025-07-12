@@ -125,10 +125,16 @@
       <label for="style_note">Anything to Emphasize or Avoid in Replies? (optional):</label>
       <textarea name="style_note" rows="3"></textarea>
 
-      <label for="reply_to_email">Reply-To Email for Patients:</label>
+      <label for="reply_to_email">
+        Reply-To Email for Patients:<br>
+        <small>This is the email patients will see if/when they hit 'Reply' after receiving a message from this Agent.</small>
+      </label>
       <input type="email" name="reply_to_email" required />
-
-      <label for="contact_email">Contact Email (for notifications):</label>
+      
+      <label for="contact_email">
+        Contact Email (for your notifications):<br>
+        <small>We'll send alerts and SmartLead setup confirmations to this address. Patients will not see it.</small>
+      </label>
       <input type="email" name="contact_email" required />
 
       <button type="submit">Submit</button>
