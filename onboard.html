@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +26,7 @@
       margin-bottom: 20px;
     }
     .logo {
-      height: 50px;
+      height: 120px;
     }
     h1 {
       font-size: 1.5em;
@@ -89,15 +88,18 @@
 
       <label for="facility_type">Facility Type:</label>
       <select name="facility_type" required>
-        <option value="Medspa">Medspa</option>
-        <option value="Dermatology">Dermatology</option>
-        <option value="Dental">Dental</option>
-        <option value="Urgent Care">Urgent Care</option>
+        <option value="" disabled selected>Select your facility type</option>
         <option value="Community Health">Community Health</option>
+        <option value="Dental">Dental</option>
+        <option value="Dermatology">Dermatology</option>
+        <option value="Medspa">Medspa</option>
+        <option value="Urgent Care">Urgent Care</option>
         <option value="Other">Other</option>
       </select>
 
-      <label for="top_services">Top 3 Services You Offer:</label>
+      <label for="top_services">Top Services You Offer<br>
+        <small>Please separate with commas (e.g., Botox, Fillers, Laser Hair Removal). You can list up to 3.</small>
+      </label>
       <input type="text" name="top_services" required />
 
       <label for="typical_questions">Typical Patient Questions (comma separated):</label>
@@ -107,9 +109,17 @@
       <input type="text" name="office_hours" required />
 
       <label for="reply_tone">Tone Preference for Replies:</label>
-      <input type="text" name="reply_tone" required />
+      <select name="reply_tone" required>
+        <option value="" disabled selected>Select a tone preference</option>
+        <option value="Friendly & conversational">Friendly & conversational</option>
+        <option value="Professional & concise">Professional & concise</option>
+        <option value="Warm & empathetic">Warm & empathetic</option>
+        <option value="Upbeat & energetic">Upbeat & energetic</option>
+      </select>
 
-      <label for="cta">Booking Link or Call to Action:</label>
+      <label for="cta">Booking Link or Call to Action:<br>
+        <small>This can be a phone number, booking link, or any other instruction you'd like included in replies.</small>
+      </label>
       <input type="text" name="cta" required />
 
       <label for="style_note">Anything to Emphasize or Avoid in Replies? (optional):</label>
