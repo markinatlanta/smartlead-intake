@@ -120,12 +120,11 @@
         body: new FormData(form)
       }).then(async response => {
         if (response.ok) {
-          const result = await response.json();
-          form.style.display = "none";
-          const msgEl = document.getElementById("successMessage");
-          msgEl.textContent = "✅ " + result.message;
-          msgEl.style.display = "block";
-        } else {
+  form.style.display = "none";
+  // simply reveal your pre-written message
+  document.getElementById("successMessage").style.display = "block";
+}
+ else {
           const text = await response.text();
           alert(`Submission failed (${response.status}): ${text}`);
         }
