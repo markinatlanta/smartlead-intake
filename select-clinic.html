@@ -67,7 +67,8 @@
         alert("Please enter your clinic ID to continue.");
         return;
       }
-      window.location.href = `/form.html?clinic_id=${encodeURIComponent(id)}`;
+      <!-- window.location.href = `/form.html?clinic_id=${encodeURIComponent(id)}`; -->
+        window.location.href = `https://smartlead-agent.onrender.com/onboard.html?clinic_id=${encodeURIComponent(id)}`;
     }
   </script>
 </body>
