@@ -85,6 +85,7 @@
       <label for="entry.1006704117">Phone (optional)</label>
       <input type="tel" name="entry.1006704117">
 
+      <!-- Hidden clinic_id populated from URL -->
       <input type="hidden" id="clinic_id" name="clinic_id" value="">
 
       <button type="submit">Send Message</button>
@@ -102,7 +103,7 @@
 
         const clinicNames = {
           radiance: "Radiance Aesthetics",
-          // Add more if needed
+          // Add more clinic ID to name mappings here if needed
         };
 
         const titleEl = document.getElementById("formTitle");
@@ -121,8 +122,9 @@
         if (response.ok) {
           const result = await response.json();
           form.style.display = "none";
-          document.getElementById("successMessage").textContent = "✅ " + result.message;
-          document.getElementById("successMessage").style.display = "block";
+          const msgEl = document.getElementById("successMessage");
+          msgEl.textContent = "✅ " + result.message;
+          msgEl.style.display = "block";
         } else {
           const text = await response.text();
           alert(`Submission failed (${response.status}): ${text}`);
